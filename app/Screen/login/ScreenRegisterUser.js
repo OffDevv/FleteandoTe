@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 export default function ScreenRegisterUser() {
-    const carroLogo  = require('../../assets/images/logo.png')
+    const carroLogo  = require('../../Assets/images/logo.png')
   return (
     <View style = {styles.container}>
           <Text style={styles.mainText} >Registrate a </Text>
