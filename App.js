@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ScreenLogin from './app/Screen/login/ScreenLogin';
+
+import ScreenRegisterTransportista from './app/Screen/login/ScreenRegisterTransportista';
+import ScreenRegisterUser from './app/Screen/login/ScreenRegisterUser';
+
+
 
 export default function App() {
   return (
     <View style={{flex:1}}>
-      <ScreenLogin/>
+      <ScreenRegisterUser/>
     </View>
   );
 }
