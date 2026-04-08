@@ -1,25 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import ScreenLogin from './app/Screen/login/ScreenLogin';
+import { NavigationContainer } from '@react-navigation/native';
+import { enableScreens } from 'react-native-screens';
+import MyNavigation from './app/MyNavigation';
+
+enableScreens(false);
 
 export default function App() {
   return (
-    <View style={{flex:1}}>
-      <ScreenLogin/>
-    </View>
+    <NavigationContainer>
+      <MyNavigation />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  /*
-  container: {
-    
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    backgroundColor: '#FFC067',
-  },
-
-*/
-});
