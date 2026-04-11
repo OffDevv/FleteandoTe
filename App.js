@@ -1,4 +1,4 @@
-﻿import React, { useContext } from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
 import MyNavigation, { MyStackLogin } from './app/MyNavigation';
