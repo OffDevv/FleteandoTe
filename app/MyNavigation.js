@@ -14,27 +14,7 @@ import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
-import ScreenDetalleHistorial from './Screen/Detalles/ScreenDetallesHistorial';
-import { EstadoGlobalContext } from './Context/EstadoGlobalUser';
-import ScreenSettings from './Screen/Setting/ScreenSettings';
 
-
-const HistorialStack = createStackNavigator();
-function HistorialStackScreen() {
-  return (<HistorialStack.Navigator>
-      <HistorialStack.Screen 
-        name="HistorialList" 
-        component={ScreenHistorial} 
-        options={{ headerShown: false }} 
-      />
-      <HistorialStack.Screen 
-        name="DetalleHistorial" 
-        component={ScreenDetalleHistorial} 
-        options={{ title: 'Detalle del EnvÃ­o' }} 
-      />
-    </HistorialStack.Navigator>
-  );
-}
 const Stack = createStackNavigator();
 export default function MyNavigation() {
   return (
@@ -83,7 +63,7 @@ export function MyStackLogin(){
 function Configuracion(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="configuracion" component={ScreenSettings} options={{ title: 'ConfiguraciÃ³n', headerShown: false }} />
+      <Stack.Screen name="test" component={ScreenRegisterTransportista} options={{ title: 'test', headerShown: false }} />
     </Stack.Navigator>
   )
 }
