@@ -1,34 +1,40 @@
-//import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-//import { StyleSheet, Text, View } from 'react-native';
-// import MiprimerComponente from './app/components/MiprimerComponente';
-
 import { NavigationContainer } from '@react-navigation/native';
-import MyNavigation from './app/MyNavigation';
 import { enableScreens } from 'react-native-screens';
-import ScreenHomeDelivery from './app/Screen/Home/ScreenHomeDelivery';
+import MyNavigation, { MyStackLogin } from './app/MyNavigation';
+import EstadoGlobalUser, { EstadoGlobalContext } from './app/Context/EstadoGlobalUser';
+import { PaperProvider } from 'react-native-paper';
+import { ActivityIndicator, View } from 'react-native';
+import 'react-native-gesture-handler';
+import ScreenHomeUsers from './app/Screen/Home/ScreenHomeUsers';
+
+enableScreens(false);
 
 
-enableScreens(false); //Desactiva react natuive screens
 
 
+function MainApp() {
+  const { login, authReady } = useContext(EstadoGlobalContext)
+  if (!authReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#2094FE" />
+      </View>
+    );
+  }
+
+  return login ? <MyNavigation /> : <MyStackLogin />
+}
 export default function App() {
-  return (
-  
-     
-        <NavigationContainer>
-          <MyNavigation/>
-        </NavigationContainer>
-      
-  
+  {/*se envuelve todo para que pueda usar el context*/ }
+  return (    
+    
+    <EstadoGlobalUser>   
+      <NavigationContainer>   
+        <PaperProvider>
+          <MainApp />
+        </PaperProvider>
+      </NavigationContainer>
+    </EstadoGlobalUser>
   );
 }
-
-/*const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-}); */
