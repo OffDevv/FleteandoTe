@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { TextInput, Button } from 'react-native-paper';
+import React, { useState, useContext } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { TextInput, Button, Card } from 'react-native-paper';
+import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
+import { useNavigation } from '@react-navigation/native';
 
 //importacion del icono de los ojos:
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,6 +10,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 export default function ScreenLogin() {
+
+    //constante de las navegacoiones a otras ventanas
+    const navigation = useNavigation();
     //vamos a poner un useState para ver nuestra contraseña
     const [verPass, setVerPass] = useState(true);
 
@@ -19,6 +24,19 @@ export default function ScreenLogin() {
         console.log("me presionaste") //creamos una famosa funcion llamada presion para verificar que el boton funciona
     }
 
+
+    //funcion para hacer set al login
+    const { setLogin } = useContext(EstadoGlobalContext)
+
+    //funcion para loguearse
+    const login = () => {
+        if (mail == 'admin' && password == '123') {
+            setLogin(true);
+            Alert.alert('Bienvenido usuario')
+        } else {
+            Alert.alert('datos incorrectos')
+        }
+    }
 
     return (
         <ScrollView
@@ -56,8 +74,8 @@ export default function ScreenLogin() {
                     />
                     <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>Contraseña:</Text>
                     <TextInput
-                        value = {password}
-                        onChangeText={(texto) =>{
+                        value={password}
+                        onChangeText={(texto) => {
                             setPassword(texto);
                             console.log(texto);
                         }}
@@ -100,7 +118,7 @@ export default function ScreenLogin() {
                     <Button
                         mode='contained'
                         style={styles.styleButtonLogin}
-                        onPress={presion}
+                        onPress={login}
                     >Iniciar sesion</Button>
 
                     <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>¿No tienes cuenta?</Text>
@@ -119,7 +137,9 @@ export default function ScreenLogin() {
                     <View style={styles.containerOpciones}>
                         <TouchableOpacity
                             style={styles.botonOpcion}
-                            onPress={() => console.log('Registro usuario')}
+                            onPress={() => navigation.navigate('registeruser')
+
+                                /*console.log('Registro usuario')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
                                 Regístrate aquí como usuario
@@ -128,7 +148,8 @@ export default function ScreenLogin() {
 
                         <TouchableOpacity
                             style={styles.botonOpcion}
-                            onPress={() => console.log('Registro flete')}
+                            onPress={() => navigation.navigate('registertransportista')
+                                /*console.log('Registro flete')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
                                 Regístrate aquí como fletero

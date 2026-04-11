@@ -10,11 +10,16 @@ import ScreenLogin from './Screen/login/ScreenLogin';
 import ScreenHomeUsers from './Screen/Home/ScreenHomeUsers';
 import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
+import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
+import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
 
 const Stack = createStackNavigator();
 export default function MyNavigation() {
   return (
     <Tab.Navigator>
+
+      
+
       <Tab.Screen name="inicio"
         component={MyStackHome}
         options={{
@@ -24,6 +29,7 @@ export default function MyNavigation() {
             <FontAwesome name="home" size={size} color={color} />
         }}
       />
+
       <Tab.Screen name='transportes' component={ScreenTransportes} options={{
         headerShown: false,
         title: 'Transportes',
@@ -37,18 +43,44 @@ export default function MyNavigation() {
         tabBarIcon: ({ color, size }) =>
           <FontAwesome name="history" size={24} color="#555" />
       }} />
-
+      <Tab.Screen name="testing"
+        component={Testeo}
+        options={{
+          headerShown: false,
+          //title: 'login',
+          tabBarIcon: ({ color, size }) =>
+            <FontAwesome name="cog" size={size} color={color} />
+        }}
+      />
 
     </Tab.Navigator>
 
   )
 }
 
+export function MyStackLogin(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name='login' component={ScreenLogin} options={{ title: 'login', headerShown: false, animation: 'slide_from_left' }}/>
+      <Stack.Screen name='registeruser' component={ScreenRegisterUser} options={{ title: 'register user', headerShown: false }} />
+      <Stack.Screen name='registertransportista' component={ScreenRegisterTransportista} options={{ title: 'register transportista', headerShown: false }} />
+    </Stack.Navigator>
+  )
+}
+
+function Testeo(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="test" component={ScreenRegisterTransportista} options={{ title: 'test', headerShown: false }} />
+    </Stack.Navigator>
+  )
+}
+
+
 function MyStackHome() {
   return (
-    <Stack.Navigator initialRouteName='login'>
-      <Stack.Screen name="login" component={ScreenLogin} options={{ title: 'dashboard', headerShown:false }} />
-      <Stack.Screen name="menustack" component={ScreenHomeUsers} />
+    <Stack.Navigator initialRouteName='menustack'>
+      <Stack.Screen name="menustack" component={ScreenHomeUsers} options={{ title: 'dashboard', headerShown: false }} />
     </Stack.Navigator>
   )
 }
