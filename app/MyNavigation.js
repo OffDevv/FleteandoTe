@@ -12,13 +12,29 @@ import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
+import ScreenDetalleHistorial from './Screen/Detalles/ScreenDetallesHistorial';
 
+
+const HistorialStack = createStackNavigator();
+function HistorialStackScreen() {
+  return (<HistorialStack.Navigator>
+      <HistorialStack.Screen 
+        name="HistorialList" 
+        component={ScreenHistorial} 
+        options={{ headerShown: false }} 
+      />
+      <HistorialStack.Screen 
+        name="DetalleHistorial" 
+        component={ScreenDetalleHistorial} 
+        options={{ title: 'Detalle del Envío' }} 
+      />
+    </HistorialStack.Navigator>
+  );
+}
 const Stack = createStackNavigator();
 export default function MyNavigation() {
   return (
     <Tab.Navigator>
-
-      
 
       <Tab.Screen name="inicio"
         component={MyStackHome}
@@ -37,7 +53,7 @@ export default function MyNavigation() {
           <FontAwesome name="truck" size={24} color="#555" />
       }} />
 
-      <Tab.Screen name='historial' component={ScreenHistorial} options={{
+      <Tab.Screen name='historial' component={HistorialStackScreen} options={{
         headerShown: false,
         title: 'Historial',
         tabBarIcon: ({ color, size }) =>

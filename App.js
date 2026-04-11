@@ -6,6 +6,8 @@ import EstadoGlobalUser, { EstadoGlobalContext } from './app/Context/EstadoGloba
 import { PaperProvider } from 'react-native-paper';
 import 'react-native-gesture-handler';
 
+enableScreens(false);
+
 
 
 
