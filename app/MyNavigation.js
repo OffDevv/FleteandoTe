@@ -12,7 +12,7 @@ import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
-
+import ScreenMaps from './Screen/Map/ScreenMaps';
 const Stack = createStackNavigator();
 export default function MyNavigation() {
   return (
@@ -71,7 +71,7 @@ export function MyStackLogin(){
 function Testeo(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="test" component={ScreenRegisterTransportista} options={{ title: 'test', headerShown: false }} />
+      <Stack.Screen name="test" component={ScreenMaps} options={{ title: 'test', headerShown: false }} />
     </Stack.Navigator>
   )
 }

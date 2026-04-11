@@ -1,10 +1,17 @@
 {
   "expo": {
     "name": "FleteandoTe",
-    "slug": "FleteandoTe",
-    "version": "1.0.0",
-    "plugins": [
-      "expo-font"
-    ]
+    "android": {
+      "package": "com.fermp.fleteandote",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo" 
+        }
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    }
   }
 }
