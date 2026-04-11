@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Saludo from '../../Components/Saludo';
@@ -16,9 +16,7 @@ export default function ScreenHomeUsers() {
       <View style={styles.separator}
       
       />
-     {/*Aqui debo usar props*/}
-     {/*<Text style={styles.question}>¿Ya sabes a donde te dirigiras hoy ?</Text>*/}   
-      <Saludo nombre = {usuario} />
+   
     <Image source={require('../../Assets/Imagen1.png')} style={{ width: '100%', height: 300, marginTop: 20 }} />
 
     <TouchableOpacity style={styles.routeButton} onPress={() => console.log('Pressed')}>

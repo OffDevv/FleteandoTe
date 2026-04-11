@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+﻿import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
 import MyNavigation, { MyStackLogin } from './app/MyNavigation';
 import EstadoGlobalUser, { EstadoGlobalContext } from './app/Context/EstadoGlobalUser';
 import { PaperProvider } from 'react-native-paper';
+import { ActivityIndicator, View } from 'react-native';
 import 'react-native-gesture-handler';
+import ScreenHomeUsers from './app/Screen/Home/ScreenHomeUsers';
 
 enableScreens(false);
 
@@ -12,8 +14,15 @@ enableScreens(false);
 
 
 function MainApp() {
-  const { login } = useContext(EstadoGlobalContext)
-  console.log(login) // para chequear vamos a obtener el valor del false
+  const { login, authReady } = useContext(EstadoGlobalContext)
+  if (!authReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#2094FE" />
+      </View>
+    );
+  }
+
   return login ? <MyNavigation /> : <MyStackLogin />
 }
 export default function App() {

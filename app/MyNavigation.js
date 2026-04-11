@@ -1,18 +1,22 @@
-
+﻿
+import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
 
-//añadimiento de las diferentes pantallas
+//aÃ±adimiento de las diferentes pantallas
 import ScreenLogin from './Screen/login/ScreenLogin';
 import ScreenHomeUsers from './Screen/Home/ScreenHomeUsers';
+import ScreenHomeDelivery from './Screen/Home/ScreenHomeDelivery';
 import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
 import ScreenDetalleHistorial from './Screen/Detalles/ScreenDetallesHistorial';
+import { EstadoGlobalContext } from './Context/EstadoGlobalUser';
+import ScreenSettings from './Screen/Setting/ScreenSettings';
 
 
 const HistorialStack = createStackNavigator();
@@ -26,7 +30,7 @@ function HistorialStackScreen() {
       <HistorialStack.Screen 
         name="DetalleHistorial" 
         component={ScreenDetalleHistorial} 
-        options={{ title: 'Detalle del Envío' }} 
+        options={{ title: 'Detalle del EnvÃ­o' }} 
       />
     </HistorialStack.Navigator>
   );
@@ -45,22 +49,14 @@ export default function MyNavigation() {
             <FontAwesome name="home" size={size} color={color} />
         }}
       />
-
-      <Tab.Screen name='transportes' component={ScreenTransportes} options={{
-        headerShown: false,
-        title: 'Transportes',
-        tabBarIcon: ({ color, size }) =>
-          <FontAwesome name="truck" size={24} color="#555" />
-      }} />
-
       <Tab.Screen name='historial' component={HistorialStackScreen} options={{
         headerShown: false,
         title: 'Historial',
         tabBarIcon: ({ color, size }) =>
           <FontAwesome name="history" size={24} color="#555" />
       }} />
-      <Tab.Screen name="testing"
-        component={Testeo}
+      <Tab.Screen name="configuracion"
+        component={Configuracion}
         options={{
           headerShown: false,
           //title: 'login',
@@ -84,19 +80,25 @@ export function MyStackLogin(){
   )
 }
 
-function Testeo(){
+function Configuracion(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="test" component={ScreenRegisterTransportista} options={{ title: 'test', headerShown: false }} />
+      <Stack.Screen name="configuracion" component={ScreenSettings} options={{ title: 'ConfiguraciÃ³n', headerShown: false }} />
     </Stack.Navigator>
   )
 }
 
 
 function MyStackHome() {
+  const { transportista } = useContext(EstadoGlobalContext);
+
   return (
     <Stack.Navigator initialRouteName='menustack'>
-      <Stack.Screen name="menustack" component={ScreenHomeUsers} options={{ title: 'dashboard', headerShown: false }} />
+      <Stack.Screen
+        name="menustack"
+        component={transportista ? ScreenHomeDelivery : ScreenHomeUsers}
+        options={{ title: 'dashboard', headerShown: false }}
+      />
     </Stack.Navigator>
   )
 }
