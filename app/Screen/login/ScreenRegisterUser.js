@@ -1,4 +1,4 @@
-﻿import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
 import { TextInput, Button, Icon,Card } from 'react-native-paper'
 import React, {useState} from 'react'
 import { Image } from 'expo-image'
