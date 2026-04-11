@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
-=======
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
->>>>>>> origin/master
+﻿import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
 import { TextInput, Button, Card } from 'react-native-paper'
 import React, { useState } from 'react'
 import { Image } from 'expo-image'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
 import { registerAccount } from '../../services/registerService';
-=======
->>>>>>> origin/master
 
 export default function ScreenRegisterTransportista() {
   const carroLogo = require('../../Assets/images/logo.png')
@@ -25,7 +18,6 @@ export default function ScreenRegisterTransportista() {
   const [contra2, setContra2] = useState('');
   const [verPass, setVerPass] = useState(true)
   const [verPass2, setVerPass2] = useState(true)
-<<<<<<< HEAD
   const [loading, setLoading] = useState(false)
 
   const presion = async () => {
@@ -38,12 +30,12 @@ export default function ScreenRegisterTransportista() {
     }
 
     if (contra1 !== contra2) {
-      Alert.alert('Contraseñas', 'Las contraseñas no coinciden.');
+      Alert.alert('ContraseÃ±as', 'Las contraseÃ±as no coinciden.');
       return;
     }
 
     if (contra1.length < 6) {
-      Alert.alert('Contraseña insegura', 'La contraseña debe tener al menos 6 caracteres.');
+      Alert.alert('ContraseÃ±a insegura', 'La contraseÃ±a debe tener al menos 6 caracteres.');
       return;
     }
 
@@ -63,10 +55,6 @@ export default function ScreenRegisterTransportista() {
     } finally {
       setLoading(false);
     }
-=======
-  const presion = () => {
-    console.log("presion boton registro transportista")
->>>>>>> origin/master
   }
 
   const navigation = useNavigation();
@@ -81,11 +69,11 @@ export default function ScreenRegisterTransportista() {
         backgroundColor: '#ffffff',
         borderRadius: 35,
         position: 'absolute', // Se posiciona respecto al ScrollView
-        top: 50,              // Distancia desde arriba (ajusta según el notch del cel)
+        top: 50,              // Distancia desde arriba (ajusta segÃºn el notch del cel)
         left: 20,             // Distancia desde la izquierda
-        width: 50,            // Un ancho razonable para un botón de "atrás"
+        width: 50,            // Un ancho razonable para un botÃ³n de "atrÃ¡s"
         height: 50,
-        zIndex: 10,           // Asegura que esté por encima de todo
+        zIndex: 10,           // Asegura que estÃ© por encima de todo
         justifyContent: 'center',
         alignItems: 'center'
       }} onPress={() => navigation.navigate('login')}>
@@ -152,7 +140,7 @@ export default function ScreenRegisterTransportista() {
             }}
           />
           <Text style={styles.datosLabels}>
-            Contraseña:
+            ContraseÃ±a:
           </Text>
           <TextInput
             value={contra1}
@@ -162,7 +150,7 @@ export default function ScreenRegisterTransportista() {
             }}
             secureTextEntry={verPass}
             style={styles.inputs}
-            placeholder="Ej. SuperContraseña777"
+            placeholder="Ej. SuperContraseÃ±a777"
             mode='outlined'
             placeholderTextColor="#c4c4c4"
             right={
@@ -188,7 +176,7 @@ export default function ScreenRegisterTransportista() {
             }}
           />
           <Text style={styles.datosLabels}>
-            Escribe otra vez tu contraseña:
+            Escribe otra vez tu contraseÃ±a:
           </Text>
           <TextInput
             value={contra2}
@@ -198,7 +186,7 @@ export default function ScreenRegisterTransportista() {
             }}
             secureTextEntry={verPass2}
             style={styles.inputs}
-            placeholder="Ingresa tu de nuevo tu contraseña"
+            placeholder="Ingresa tu de nuevo tu contraseÃ±a"
             mode='outlined'
             placeholderTextColor="#c4c4c4"
             right={
@@ -226,19 +214,15 @@ export default function ScreenRegisterTransportista() {
           {/*esta parte de la logica me ayudara a hacer que suelte el mensaje de error si las contras no son las mismas*/}
           {contra2.length > 0 && contra1 !== contra2 && (
             <Text style={styles.errorText}>
-              Las contraseñas no coinciden
+              Las contraseÃ±as no coinciden
             </Text>
           )}
           <Button
             mode='contained'
             style={styles.styleButtonLogin}
             onPress={presion}
-<<<<<<< HEAD
             loading={loading}
             disabled={loading || contra1 !== contra2 || contra1 === ''}
-=======
-            disabled={contra1 !== contra2 || contra1 === ''}
->>>>>>> origin/master
           >Crea tu cuenta</Button>
         </View>
       </View>
@@ -261,7 +245,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 65,
     marginBottom: 7,
-    textAlign: 'center', // <--- Esto centra las líneas de texto entre sí
+    textAlign: 'center', // <--- Esto centra las lÃ­neas de texto entre sÃ­
     paddingHorizontal: 20, // <--- Esto evita que el texto toque los bordes de la pantalla
   },
   text: {

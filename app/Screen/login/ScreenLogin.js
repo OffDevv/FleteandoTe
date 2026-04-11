@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import React, { useState, useContext } from 'react';
-=======
-import React, { useState, useContext, use } from 'react';
->>>>>>> origin/master
+﻿import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Card } from 'react-native-paper';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
 import { loginWithEmailPassword } from '../../services/authService';
-=======
->>>>>>> origin/master
 
 //importacion del icono de los ojos:
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -19,7 +12,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function ScreenLogin() {
 
-<<<<<<< HEAD
    
     const navigation = useNavigation();
    
@@ -64,46 +56,13 @@ export default function ScreenLogin() {
             Alert.alert('Datos incorrectos', error.message || 'No se pudo iniciar sesion.');
         } finally {
             setLoading(false);
-=======
-    //constante de las navegacoiones a otras ventanas
-    const navigation = useNavigation();
-    //vamos a poner un useState para ver nuestra contraseña
-    const [verPass, setVerPass] = useState(true);
-
-    //me falta setear el nombre y el password
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const presion = () => {
-        console.log("me presionaste") //creamos una famosa funcion llamada presion para verificar que el boton funciona
-    }
-
-
-    //funcion para hacer set al login de forma global
-    const { setLogin } = useContext(EstadoGlobalContext);
-    const {setUsuario} = useContext(EstadoGlobalContext);
-
-    //funcion para loguearse
-    const login = () => {
-        if (mail !== '' && password == '123') {
-            setUsuario(mail)
-            setLogin(true);
-            Alert.alert('Bienvenido usuario')
-        } else {
-            Alert.alert('datos incorrectos')
->>>>>>> origin/master
         }
     }
 
     return (
         <ScrollView
-<<<<<<< HEAD
             style={{ backgroundColor: '#FFC067' }} 
             contentContainerStyle={{ flexGrow: 1 }} 
-=======
-            style={{ backgroundColor: '#FFC067' }} // Color de fondo del scroll
-            contentContainerStyle={{ flexGrow: 1 }} // Obliga al contenido a expandirse
->>>>>>> origin/master
             bounces={false}>
             <View style={styles.container}>
                 {//<View style={{  backgroundColor: 'green' }}>
@@ -122,31 +81,18 @@ export default function ScreenLogin() {
                     <TextInput
                         style={styles.inputs}
                         placeholder="Ingresa tu email"
-<<<<<<< HEAD
                         value={mail} 
                         onChangeText={(texto) => {
                             setMail(texto);        
                             console.log(texto);   
-=======
-                        value={mail} // 1. Conectamos el valor con el estado
-                        onChangeText={(texto) => {
-                            setMail(texto);        // 2. Guardamos el texto       aqui estoy viendo como mostrar en la consola que estoy guardando correctamentea en la variable set
-                            console.log(texto);   // 3. Lo vemos en consola
->>>>>>> origin/master
                         }}
                         mode="outlined"
                         placeholderTextColor="#c4c4c4"
                         theme={{
                             colors: {
-<<<<<<< HEAD
                                 primary: '#cccccc',      
                                 background: '#F5F5F5', 
                                 outline: 'transparent' 
-=======
-                                primary: '#cccccc',      // le pongo color del borde activo
-                                background: '#F5F5F5',   // le pongo color de fondo del input
-                                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
->>>>>>> origin/master
                             },
                             roundness: 15
                         }}
@@ -155,7 +101,7 @@ export default function ScreenLogin() {
 
 
 
-                    <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>Contraseña:</Text>
+                    <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>ContraseÃ±a:</Text>
                     <TextInput
                         value={password}
                         onChangeText={(texto) => {
@@ -164,7 +110,7 @@ export default function ScreenLogin() {
                         }}
                         secureTextEntry={verPass}
                         style={styles.inputs}
-                        placeholder="Ingresa tu contraseña"
+                        placeholder="Ingresa tu contraseÃ±a"
                         mode='outlined'
                         placeholderTextColor="#c4c4c4"
                         right={
@@ -175,7 +121,7 @@ export default function ScreenLogin() {
                             /> 
                             */
                             <TextInput.Icon
-                                // 1. Usamos la función para renderizar Ionicons            
+                                // 1. Usamos la funciÃ³n para renderizar Ionicons            
                                 // 2. Corregimos el nombre de la variable a verPass          //esta es la version un poco mas complicada por que uso props para agarrar los iconos de la libreria de ionicons
                                 icon={props => (
                                     <Ionicons
@@ -202,23 +148,20 @@ export default function ScreenLogin() {
                         mode='contained'
                         style={styles.styleButtonLogin}
                         onPress={login}
-<<<<<<< HEAD
                         loading={loading}
                         disabled={loading}
-=======
->>>>>>> origin/master
                     >Iniciar sesion</Button>
 
-                    <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>¿No tienes cuenta?</Text>
+                    <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>Â¿No tienes cuenta?</Text>
                     {/*
                 <Button
                     mode="text"
-                    textColor="#2094FE" // Aquí pones el color que quieras (ejemplo: el naranja de tu fondo)
+                    textColor="#2094FE" // AquÃ­ pones el color que quieras (ejemplo: el naranja de tu fondo)
                     onPress={() => console.log('Registro usuario')}
                     labelStyle={{ fontSize: 16, fontWeight: 'black' }}>registrate aqui como usuario</Button>
                 <Button
                     mode="text"
-                    textColor="#2094FE" // Aquí pones el color que quieras (ejemplo: el naranja de tu fondo)
+                    textColor="#2094FE" // AquÃ­ pones el color que quieras (ejemplo: el naranja de tu fondo)
                     onPress={() => console.log('Registro usuario')}
                     labelStyle={{ fontSize: 16, fontWeight: 'black' }}>registrate aqui como cargamentero</Button>
 */}
@@ -230,7 +173,7 @@ export default function ScreenLogin() {
                                 /*console.log('Registro usuario')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
-                                Regístrate aquí como usuario
+                                RegÃ­strate aquÃ­ como usuario
                             </Text>
                         </TouchableOpacity>
 
@@ -240,7 +183,7 @@ export default function ScreenLogin() {
                                 /*console.log('Registro flete')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
-                                Regístrate aquí como fletero
+                                RegÃ­strate aquÃ­ como fletero
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -301,7 +244,7 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',   // color del borde
         borderRadius: 10,      // esquinas redondeadas
         paddingHorizontal: 10, // espacio interno
-        marginTop: 5          // separación respecto al texto anterior
+        marginTop: 5          // separaciÃ³n respecto al texto anterior
     },
     inputs: {
 
@@ -323,11 +266,11 @@ const styles = StyleSheet.create({
         width: '100%',               // Ocupa el ancho del cuadro blanco
         justifyContent: 'center',    // Centra el contenido
         marginTop: 15,
-        paddingHorizontal: 10,       // Pequeño espacio a los lados
+        paddingHorizontal: 10,       // PequeÃ±o espacio a los lados
         marginBottom: 28
     },
     botonOpcion: {
-        flex: 1,                     // Cada "botón" toma el 50%
+        flex: 1,                     // Cada "botÃ³n" toma el 50%
         padding: 5,                  // Espacio para facilitar el click
     },
     textoBotonOpcion: {
@@ -335,7 +278,7 @@ const styles = StyleSheet.create({
         color: '#2094FE',
         textAlign: 'center',         // Centra el texto en su columna
         fontWeight: '500',           // Un poco de grosor
-        lineHeight: 18,              // Espacio entre las dos líneas
+        lineHeight: 18,              // Espacio entre las dos lÃ­neas
     },
 
 });

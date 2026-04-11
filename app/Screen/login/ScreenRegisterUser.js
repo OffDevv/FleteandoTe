@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
-=======
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
->>>>>>> origin/master
+﻿import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
 import { TextInput, Button, Icon,Card } from 'react-native-paper'
 import React, {useState} from 'react'
 import { Image } from 'expo-image'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
 import { registerAccount } from '../../services/registerService';
-=======
->>>>>>> origin/master
 
 export default function ScreenRegisterUser() {
     const carroLogo = require('../../Assets/images/logo.png')
@@ -23,7 +16,6 @@ export default function ScreenRegisterUser() {
     const [contra2, setContra2] = useState('');
     const [verPass, setVerPass] = useState(true)
     const [verPass2, setVerPass2] = useState(true)
-<<<<<<< HEAD
     const [loading, setLoading] = useState(false)
 
     const presion = async () => {
@@ -36,12 +28,12 @@ export default function ScreenRegisterUser() {
         }
 
         if (contra1 !== contra2) {
-            Alert.alert('Contraseñas', 'Las contraseñas no coinciden.');
+            Alert.alert('ContraseÃ±as', 'Las contraseÃ±as no coinciden.');
             return;
         }
 
         if (contra1.length < 6) {
-            Alert.alert('Contraseña insegura', 'La contraseña debe tener al menos 6 caracteres.');
+            Alert.alert('ContraseÃ±a insegura', 'La contraseÃ±a debe tener al menos 6 caracteres.');
             return;
         }
 
@@ -61,10 +53,6 @@ export default function ScreenRegisterUser() {
         } finally {
             setLoading(false);
         }
-=======
-    const presion = () => {
-        console.log("presion boton registro usuario")
->>>>>>> origin/master
     }
     //constante de las navegacoiones a otras ventanas
     const navigation = useNavigation();
@@ -150,7 +138,7 @@ export default function ScreenRegisterUser() {
                     }}
                 />
                 <Text style={styles.datosLabels}>
-                    Escribe tu contraseña:
+                    Escribe tu contraseÃ±a:
                 </Text>
                 <TextInput
                     value={contra1}
@@ -160,7 +148,7 @@ export default function ScreenRegisterUser() {
                     }}
                     secureTextEntry={verPass}
                     style={styles.inputs}
-                    placeholder="Ej. SuperContraseña777"
+                    placeholder="Ej. SuperContraseÃ±a777"
                     mode='outlined'
                     placeholderTextColor="#c4c4c4"
                     right={
@@ -186,7 +174,7 @@ export default function ScreenRegisterUser() {
                     }}
                 />
                 <Text style={styles.datosLabels}>
-                    Escribe otra vez tu contraseña:
+                    Escribe otra vez tu contraseÃ±a:
                 </Text>
                 <TextInput
                     value={contra2}
@@ -196,7 +184,7 @@ export default function ScreenRegisterUser() {
                     }}
                     secureTextEntry={verPass2}
                     style={styles.inputs}
-                    placeholder="Ingresa tu de nuevo tu contraseña"
+                    placeholder="Ingresa tu de nuevo tu contraseÃ±a"
                     mode='outlined'
                     placeholderTextColor="#c4c4c4"
                     right={
@@ -224,19 +212,15 @@ export default function ScreenRegisterUser() {
                 {/*esta parte de la logica me ayudara a hacer que suelte el mensaje de error si las contras no son las mismas*/}
                 {contra2.length > 0 && contra1 !== contra2 && (
                     <Text style={styles.errorText}>
-                        Las contraseñas no coinciden
+                        Las contraseÃ±as no coinciden
                     </Text>
                 )}
                     <Button
                         mode='contained'
                         style={styles.styleButtonLogin}
                         onPress={presion}
-<<<<<<< HEAD
                         loading={loading}
                         disabled = {loading || contra1 !== contra2 || contra1 === ''}
-=======
-                        disabled = {contra1 !== contra2 || contra1 === ''}
->>>>>>> origin/master
                     >Crea tu cuenta</Button>
             </View>
         </View>
