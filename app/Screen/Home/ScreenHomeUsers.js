@@ -16,7 +16,13 @@ export default function ScreenHomeUsers() {
       <View style={styles.separator}
       
       />
+<<<<<<< HEAD
    
+=======
+     {/*Aqui debo usar props*/}
+     {/*<Text style={styles.question}>¿Ya sabes a donde te dirigiras hoy ?</Text>*/}   
+      <Saludo nombre = {usuario} />
+>>>>>>> origin/master
     <Image source={require('../../Assets/Imagen1.png')} style={{ width: '100%', height: 300, marginTop: 20 }} />
 
     <TouchableOpacity style={styles.routeButton} onPress={() => console.log('Pressed')}>

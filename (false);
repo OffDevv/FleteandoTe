@@ -1,0 +1,70 @@
+[33mcommit 64de728d2734e1f1f3d154bf8ff6e88ad84cb3e9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mTrabajoLuis[m[33m)[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Sat Apr 11 02:13:11 2026 -0500
+
+    fix(App.js): se elimina el error del - enableScreens(false); -  en App.js y se importa correctamente la libreria necesaria
+
+[33mcommit 6b242522696581084f2d82a4d9ba754ca1105523[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/TrabajoLuis[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Sat Apr 11 01:44:35 2026 -0500
+
+    build(login-registros: se agregaron las screens de inicio de sesion y registros de los usuarios, se implemento el estado global para permitir entrar a la aplicacion si la contraseña es correcta
+
+[33mcommit a5611e9abf3030f458f737822e4813a722ba4349[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Wed Apr 8 02:20:28 2026 -0500
+
+    fix(paquetes incompatibles): se reparo el error de los paquetes que no eran disponibles con la version de expo para permitir que el tab navigator funcionara
+
+[33mcommit d8e182989393f92d1b552f3751d8c807903ca780[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Wed Apr 8 01:07:46 2026 -0500
+
+    Resolviendo conflictos al traer master a TrabajoLuis
+
+[33mcommit b5d436bf79359013bf1595d111ee1fdd128e6b85[m
+Merge: f7202ed f9f29fd
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Wed Apr 8 00:57:02 2026 -0500
+
+    Merge branch 'TrabajoLuis'
+
+[33mcommit f9f29fd8a527026e28c685af2a748f867023e495[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Wed Apr 8 00:50:21 2026 -0500
+
+    merge para bajar los cambios de mi compañero(cambio solo en App.js (cambio de screen))
+
+[33mcommit f7202ed8b3a16b1bfe881cc368fcddb15c08438d[m
+Merge: 0a32731 ae348e8
+Author: vaguer2 <2402025@utrivieramaya.edu.mx>
+Date:   Wed Apr 8 00:21:19 2026 -0500
+
+    Merge branch 'RamaJosue'
+    
+    # Conflicts:
+    #       App.js
+
+[33mcommit 0a32731f53707b3b777f60e318afd5ffd8db5461[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Tue Apr 7 22:27:55 2026 -0500
+
+    build(app/Screen/login/ScreenLogin): construccion del login (sin conexion a db)
+
+[33mcommit ae348e8b0c8b87cfb2e2bad43fce51c2a875ba7b[m
+Author: vaguer2 <2402025@utrivieramaya.edu.mx>
+Date:   Tue Apr 7 17:49:45 2026 -0500
+
+    Creacion del home de users y deliverys con tabs incluidos
+
+[33mcommit 2a10bde2a7d8c23d0d5e8dff0e68157a2dd5e152[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Mon Apr 6 23:37:10 2026 -0500
+
+    build(startProject): agregacion de librerias
+
+[33mcommit ac175862a13861bf0a2d0940df07f766c56a74cf[m
+Author: Luis Meza <2402060@utrivieramaya.edu.mx>
+Date:   Mon Apr 6 22:10:33 2026 -0500
+
+    build(starProject): este es el inicio del proyecto subiendolo a gitHub

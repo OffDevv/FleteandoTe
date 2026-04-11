@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import React, { useState, useContext } from 'react';
+=======
+import React, { useState, useContext, use } from 'react';
+>>>>>>> origin/master
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Card } from 'react-native-paper';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 import { useNavigation } from '@react-navigation/native';
+<<<<<<< HEAD
 import { loginWithEmailPassword } from '../../services/authService';
+=======
+>>>>>>> origin/master
 
 //importacion del icono de los ojos:
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -12,6 +19,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function ScreenLogin() {
 
+<<<<<<< HEAD
    
     const navigation = useNavigation();
    
@@ -56,13 +64,46 @@ export default function ScreenLogin() {
             Alert.alert('Datos incorrectos', error.message || 'No se pudo iniciar sesion.');
         } finally {
             setLoading(false);
+=======
+    //constante de las navegacoiones a otras ventanas
+    const navigation = useNavigation();
+    //vamos a poner un useState para ver nuestra contraseña
+    const [verPass, setVerPass] = useState(true);
+
+    //me falta setear el nombre y el password
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const presion = () => {
+        console.log("me presionaste") //creamos una famosa funcion llamada presion para verificar que el boton funciona
+    }
+
+
+    //funcion para hacer set al login de forma global
+    const { setLogin } = useContext(EstadoGlobalContext);
+    const {setUsuario} = useContext(EstadoGlobalContext);
+
+    //funcion para loguearse
+    const login = () => {
+        if (mail !== '' && password == '123') {
+            setUsuario(mail)
+            setLogin(true);
+            Alert.alert('Bienvenido usuario')
+        } else {
+            Alert.alert('datos incorrectos')
+>>>>>>> origin/master
         }
     }
 
     return (
         <ScrollView
+<<<<<<< HEAD
             style={{ backgroundColor: '#FFC067' }} 
             contentContainerStyle={{ flexGrow: 1 }} 
+=======
+            style={{ backgroundColor: '#FFC067' }} // Color de fondo del scroll
+            contentContainerStyle={{ flexGrow: 1 }} // Obliga al contenido a expandirse
+>>>>>>> origin/master
             bounces={false}>
             <View style={styles.container}>
                 {//<View style={{  backgroundColor: 'green' }}>
@@ -81,18 +122,31 @@ export default function ScreenLogin() {
                     <TextInput
                         style={styles.inputs}
                         placeholder="Ingresa tu email"
+<<<<<<< HEAD
                         value={mail} 
                         onChangeText={(texto) => {
                             setMail(texto);        
                             console.log(texto);   
+=======
+                        value={mail} // 1. Conectamos el valor con el estado
+                        onChangeText={(texto) => {
+                            setMail(texto);        // 2. Guardamos el texto       aqui estoy viendo como mostrar en la consola que estoy guardando correctamentea en la variable set
+                            console.log(texto);   // 3. Lo vemos en consola
+>>>>>>> origin/master
                         }}
                         mode="outlined"
                         placeholderTextColor="#c4c4c4"
                         theme={{
                             colors: {
+<<<<<<< HEAD
                                 primary: '#cccccc',      
                                 background: '#F5F5F5', 
                                 outline: 'transparent' 
+=======
+                                primary: '#cccccc',      // le pongo color del borde activo
+                                background: '#F5F5F5',   // le pongo color de fondo del input
+                                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
+>>>>>>> origin/master
                             },
                             roundness: 15
                         }}
@@ -148,8 +202,11 @@ export default function ScreenLogin() {
                         mode='contained'
                         style={styles.styleButtonLogin}
                         onPress={login}
+<<<<<<< HEAD
                         loading={loading}
                         disabled={loading}
+=======
+>>>>>>> origin/master
                     >Iniciar sesion</Button>
 
                     <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>¿No tienes cuenta?</Text>

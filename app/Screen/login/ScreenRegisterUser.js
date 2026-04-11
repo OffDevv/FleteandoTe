@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
+=======
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
+>>>>>>> origin/master
 import { TextInput, Button, Icon,Card } from 'react-native-paper'
 import React, {useState} from 'react'
 import { Image } from 'expo-image'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
+<<<<<<< HEAD
 import { registerAccount } from '../../services/registerService';
+=======
+>>>>>>> origin/master
 
 export default function ScreenRegisterUser() {
     const carroLogo = require('../../Assets/images/logo.png')
@@ -16,6 +23,7 @@ export default function ScreenRegisterUser() {
     const [contra2, setContra2] = useState('');
     const [verPass, setVerPass] = useState(true)
     const [verPass2, setVerPass2] = useState(true)
+<<<<<<< HEAD
     const [loading, setLoading] = useState(false)
 
     const presion = async () => {
@@ -53,6 +61,10 @@ export default function ScreenRegisterUser() {
         } finally {
             setLoading(false);
         }
+=======
+    const presion = () => {
+        console.log("presion boton registro usuario")
+>>>>>>> origin/master
     }
     //constante de las navegacoiones a otras ventanas
     const navigation = useNavigation();
@@ -219,8 +231,12 @@ export default function ScreenRegisterUser() {
                         mode='contained'
                         style={styles.styleButtonLogin}
                         onPress={presion}
+<<<<<<< HEAD
                         loading={loading}
                         disabled = {loading || contra1 !== contra2 || contra1 === ''}
+=======
+                        disabled = {contra1 !== contra2 || contra1 === ''}
+>>>>>>> origin/master
                     >Crea tu cuenta</Button>
             </View>
         </View>
