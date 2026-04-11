@@ -4,9 +4,10 @@ import { enableScreens } from 'react-native-screens';
 import MyNavigation, { MyStackLogin } from './app/MyNavigation';
 import EstadoGlobalUser, { EstadoGlobalContext } from './app/Context/EstadoGlobalUser';
 import { PaperProvider } from 'react-native-paper';
+import 'react-native-gesture-handler';
 
 
-enableScreens(false);
+
 
 function MainApp() {
   const { login } = useContext(EstadoGlobalContext)
