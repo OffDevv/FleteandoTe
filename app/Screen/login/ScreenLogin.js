@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, use } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { TextInput, Button, Card } from 'react-native-paper';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
@@ -25,12 +25,14 @@ export default function ScreenLogin() {
     }
 
 
-    //funcion para hacer set al login
-    const { setLogin } = useContext(EstadoGlobalContext)
+    //funcion para hacer set al login de forma global
+    const { setLogin } = useContext(EstadoGlobalContext);
+    const {setUsuario} = useContext(EstadoGlobalContext);
 
     //funcion para loguearse
     const login = () => {
-        if (mail == 'admin' && password == '123') {
+        if (mail !== '' && password == '123') {
+            setUsuario(mail)
             setLogin(true);
             Alert.alert('Bienvenido usuario')
         } else {
@@ -53,6 +55,10 @@ export default function ScreenLogin() {
                     <Text style={styles.ingresaCredenciales}>Ingresa tus credenciales</Text>
 
                     <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>Email:</Text>
+                    
+                    
+                    
+                    
                     <TextInput
                         style={styles.inputs}
                         placeholder="Ingresa tu email"
@@ -72,6 +78,10 @@ export default function ScreenLogin() {
                             roundness: 15
                         }}
                     />
+
+
+
+
                     <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>Contraseña:</Text>
                     <TextInput
                         value={password}
