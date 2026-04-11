@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import Saludo from '../../Components/Saludo';
+import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 export default function ScreenHomeUsers() {
+  const {usuario} = useContext(EstadoGlobalContext)
   return (
     <ScrollView style={styles.container}>
     <View style={styles.header}>
@@ -14,8 +16,9 @@ export default function ScreenHomeUsers() {
       <View style={styles.separator}
       
       />
-     
-     <Text style={styles.question}>¿Ya sabes a donde te dirigiras hoy?</Text>
+     {/*Aqui debo usar props*/}
+     {/*<Text style={styles.question}>¿Ya sabes a donde te dirigiras hoy ?</Text>*/}   
+      <Saludo nombre = {usuario} />
     <Image source={require('../../Assets/Imagen1.png')} style={{ width: '100%', height: 300, marginTop: 20 }} />
 
     <TouchableOpacity style={styles.routeButton} onPress={() => console.log('Pressed')}>
@@ -52,13 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
     width: '100%',
   },
-  question: {
-    fontSize: 30,
-    color: '#000000',
-    textAlign: 'center',
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
+
   routeButton: {
     margin: 20,
     backgroundColor: '#FF6B00',
