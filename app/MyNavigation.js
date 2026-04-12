@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { createStackNavigator } from '@react-navigation/stack';
+import { EstadoGlobalContext } from './Context/EstadoGlobalUser';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,6 +15,7 @@ import ScreenTransportes from './Screen/Transportes/ScreenTransportes';
 import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
+import ScreenSettings from './Screen/Setting/ScreenSettings';
 
 const Stack = createStackNavigator();
 export default function MyNavigation() {
@@ -63,11 +65,18 @@ export function MyStackLogin(){
 function Configuracion(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="test" component={ScreenRegisterTransportista} options={{ title: 'test', headerShown: false }} />
+      <Stack.Screen name="test" component={ScreenSettings} options={{ title: 'test', headerShown: false }} />
     </Stack.Navigator>
   )
 }
 
+function HistorialStackScreen(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="historialscreen" component={ScreenHistorial} options={{ title: 'Historial', headerShown: false }} />
+    </Stack.Navigator>
+  )
+}
 
 function MyStackHome() {
   const { transportista } = useContext(EstadoGlobalContext);
