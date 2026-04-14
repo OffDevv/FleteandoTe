@@ -1,10 +1,22 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import Saludo from '../../Components/Saludo';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 export default function ScreenHomeUsers() {
   const {usuario} = useContext(EstadoGlobalContext)
+  const navigation = useNavigation();
+
+  const irAlMapa = () => {
+    const parent = navigation.getParent();
+    if (parent) {
+      parent.navigate('Mapa');
+      return;
+    }
+    navigation.navigate('Mapa');
+  };
+
   return (
     <ScrollView style={styles.container}>
     <View style={styles.header}>
@@ -19,7 +31,7 @@ export default function ScreenHomeUsers() {
    
     <Image source={require('../../Assets/Imagen1.png')} style={{ width: '100%', height: 300, marginTop: 20 }} />
 
-    <TouchableOpacity style={styles.routeButton} onPress={() => console.log('Pressed')}>
+    <TouchableOpacity style={styles.routeButton} onPress={irAlMapa}>
       <Text style={styles.routeButtonText}>Selecciona el parametro de tu ruta</Text>
     </TouchableOpacity>
     <View style={styles.separator} />

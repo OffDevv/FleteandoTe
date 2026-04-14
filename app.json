@@ -5,13 +5,18 @@
       "package": "com.fermp.fleteandote",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo" 
+          "apiKey": "AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo"
         }
       },
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION"
       ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "34adf472-3d37-43d2-a04a-2ae7fc955260"
+      }
     }
   }
 }

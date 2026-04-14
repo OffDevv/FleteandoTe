@@ -1,16 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
+import { Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo';
 
 export default function ScreenMaps() {
+    const navigation = useNavigation();
     const [location, setLocation] = useState(null);
     const [destination, setDestination] = useState(null);
     const [distancia, setDistancia] = useState(0);
     const [direccion, setDireccion] = useState('Toca el mapa para elegir destino');
+
+    const confirmarRuta = () => {
+        if (!destination) {
+            Alert.alert('Selecciona destino', 'Primero toca el mapa para elegir un destino.');
+            return;
+        }
+
+        Alert.alert('Ruta confirmada', 'Ahora puedes subir tu pedido.', [
+            {
+                text: 'OK',
+                onPress: () => {
+                    navigation.navigate('pedido', {
+                        destino: direccion,
+                        distancia,
+                        coordenadasDestino: destination,
+                    });
+                },
+            },
+        ]);
+    };
 
     // MÉTODO NATIVO DE EXPO: No requiere fetch, es más estable en Android
     const handlePress = async (e) => {
@@ -67,11 +90,14 @@ export default function ScreenMaps() {
 
                 {/* Caja de Dirección (Flexible para que quepa el texto largo) */}
                 <View style={[styles.infoBox, { flex: 1 }]}>
-                    <Text style={styles.label}>DESTINO</Text>
+                    <Text style={styles.label   }>DESTINO</Text>
                     <Text style={styles.addressText} numberOfLines={2}>
                         {direccion}
                     </Text>
                 </View>
+                <Button mode="contained" onPress={confirmarRuta} style={{ alignSelf: 'center', marginLeft: 10 }}>
+                    Confirmar
+                </Button>
             </View>
 
             <MapView

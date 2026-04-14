@@ -30,12 +30,12 @@ export default function ScreenRegisterTransportista() {
     }
 
     if (contra1 !== contra2) {
-      Alert.alert('ContraseÃ±as', 'Las contraseÃ±as no coinciden.');
+      Alert.alert('Contraseñas', 'Las contraseñas no coinciden.');
       return;
     }
 
     if (contra1.length < 6) {
-      Alert.alert('ContraseÃ±a insegura', 'La contraseÃ±a debe tener al menos 6 caracteres.');
+      Alert.alert('Contraseña insegura', 'La contraseña debe tener al menos 6 caracteres.');
       return;
     }
 
@@ -48,7 +48,7 @@ export default function ScreenRegisterTransportista() {
         role: 'transportista',
       });
 
-      Alert.alert('Registro exitoso', 'Tu cuenta fue creada. Revisa tu correo para confirmar tu cuenta.');
+      Alert.alert('Registro exitoso');
       navigation.navigate('login');
     } catch (error) {
       Alert.alert('No se pudo registrar', error.message || 'Intenta nuevamente.');
@@ -140,7 +140,7 @@ export default function ScreenRegisterTransportista() {
             }}
           />
           <Text style={styles.datosLabels}>
-            ContraseÃ±a:
+            Contraseña:
           </Text>
           <TextInput
             value={contra1}
@@ -150,7 +150,7 @@ export default function ScreenRegisterTransportista() {
             }}
             secureTextEntry={verPass}
             style={styles.inputs}
-            placeholder="Ej. SuperContraseÃ±a777"
+            placeholder="Ej. SuperContraseña777"
             mode='outlined'
             placeholderTextColor="#c4c4c4"
             right={
@@ -176,7 +176,7 @@ export default function ScreenRegisterTransportista() {
             }}
           />
           <Text style={styles.datosLabels}>
-            Escribe otra vez tu contraseÃ±a:
+            Escribe otra vez tu contraseña:
           </Text>
           <TextInput
             value={contra2}
@@ -186,7 +186,7 @@ export default function ScreenRegisterTransportista() {
             }}
             secureTextEntry={verPass2}
             style={styles.inputs}
-            placeholder="Ingresa tu de nuevo tu contraseÃ±a"
+            placeholder="Ingresa de nuevo tu contraseña"
             mode='outlined'
             placeholderTextColor="#c4c4c4"
             right={
@@ -214,7 +214,7 @@ export default function ScreenRegisterTransportista() {
           {/*esta parte de la logica me ayudara a hacer que suelte el mensaje de error si las contras no son las mismas*/}
           {contra2.length > 0 && contra1 !== contra2 && (
             <Text style={styles.errorText}>
-              Las contraseÃ±as no coinciden
+              Las contraseñas no coinciden
             </Text>
           )}
           <Button

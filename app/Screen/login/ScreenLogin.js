@@ -101,7 +101,7 @@ export default function ScreenLogin() {
 
 
 
-                    <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>ContraseÃ±a:</Text>
+                    <Text style={{ marginTop: 20, marginHorizontal: 19, fontSize: 17 }}>Contraseña:</Text>
                     <TextInput
                         value={password}
                         onChangeText={(texto) => {
@@ -110,7 +110,7 @@ export default function ScreenLogin() {
                         }}
                         secureTextEntry={verPass}
                         style={styles.inputs}
-                        placeholder="Ingresa tu contraseÃ±a"
+                        placeholder="Ingresa tu contraseña"
                         mode='outlined'
                         placeholderTextColor="#c4c4c4"
                         right={
@@ -152,7 +152,7 @@ export default function ScreenLogin() {
                         disabled={loading}
                     >Iniciar sesion</Button>
 
-                    <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>Â¿No tienes cuenta?</Text>
+                    <Text style={{ marginTop: 50, fontSize: 16, alignSelf: 'center' }}>¿No tienes cuenta?</Text>
                     {/*
                 <Button
                     mode="text"
@@ -173,7 +173,7 @@ export default function ScreenLogin() {
                                 /*console.log('Registro usuario')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
-                                RegÃ­strate aquÃ­ como usuario
+                                Regístrate aquí como usuario
                             </Text>
                         </TouchableOpacity>
 
@@ -183,7 +183,7 @@ export default function ScreenLogin() {
                                 /*console.log('Registro flete')*/}
                         >
                             <Text style={styles.textoBotonOpcion}>
-                                RegÃ­strate aquÃ­ como fletero
+                                Regístrate aquí como fletero
                             </Text>
                         </TouchableOpacity>
                     </View>

@@ -32,7 +32,7 @@ export default function App() {
     <EstadoGlobalUser>   
       <NavigationContainer>   
         <PaperProvider>
-          <MyNavigation />
+          <MainApp/>
         </PaperProvider>
       </NavigationContainer>
     </EstadoGlobalUser>

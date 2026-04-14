@@ -16,6 +16,8 @@ import ScreenHistorial from './Screen/Historial/ScreenHistorial';
 import ScreenRegisterUser from './Screen/login/ScreenRegisterUser';
 import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransportista';
 import ScreenSettings from './Screen/Setting/ScreenSettings';
+import ScreenMaops from './Screen/Map/ScreenMaps';
+import ScreenPedido from './Screen/Pedido/ScreenPedido';
 
 const Stack = createStackNavigator();
 export default function MyNavigation() {
@@ -46,6 +48,12 @@ export default function MyNavigation() {
             <FontAwesome name="cog" size={size} color={color} />
         }}
       />
+      <Tab.Screen name="Mapa" component={MyStackMaps} options={{
+        headerShown: false,
+        title: 'Mapa',
+        tabBarIcon: ({ color, size }) =>
+          <FontAwesome name="map" size={24} color="#555" />
+      }} />
 
     </Tab.Navigator>
 
@@ -58,6 +66,14 @@ export function MyStackLogin(){
       <Stack.Screen name='login' component={ScreenLogin} options={{ title: 'login', headerShown: false, animation: 'slide_from_left' }}/>
       <Stack.Screen name='registeruser' component={ScreenRegisterUser} options={{ title: 'register user', headerShown: false }} />
       <Stack.Screen name='registertransportista' component={ScreenRegisterTransportista} options={{ title: 'register transportista', headerShown: false }} />
+    </Stack.Navigator>
+  )
+}
+function MyStackMaps(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name='mapa' component={ScreenMaops} options={{ title: 'Mapa', headerShown: false }} />
+      <Stack.Screen name='pedido' component={ScreenPedido} options={{ title: 'Subir pedido', headerShown: false }} />
     </Stack.Navigator>
   )
 }

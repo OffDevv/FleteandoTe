@@ -19,6 +19,16 @@ npm start
 npm --prefix backend run dev
 ```
 
+## APK
+
+Para generar un APK, la app necesita una URL publica del backend. Crea una variable de entorno como esta antes de compilar:
+
+```bash
+EXPO_PUBLIC_API_BASE_URL=https://tu-api-publica.com
+```
+
+En desarrollo, la app usa `10.0.2.2` en Android Emulator y `localhost` en iOS.
+
 ## Instalación
 
 Instala dependencias en la raíz y en el backend por separado:
