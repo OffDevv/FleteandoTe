@@ -47,7 +47,7 @@ export async function registerAccount({ name, email, password, role }) {
           password,
           rol: role,
         }),
-      });
+      }, 20000);
       if (!response.ok || !payload?.ok) {
         throw new Error(getFriendlyError(response.status, payload?.message));
       }
@@ -56,7 +56,7 @@ export async function registerAccount({ name, email, password, role }) {
     } catch (error) {
       lastError = error;
       const errorMessage = String(error?.message || '').toLowerCase();
-      if (errorMessage.includes('network request failed') || errorMessage.includes('aborted')) {
+      if (errorMessage.includes('network request failed') || errorMessage.includes('aborted') || errorMessage.includes('aborterror')) {
         continue;
       }
 

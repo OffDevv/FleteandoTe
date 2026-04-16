@@ -2,7 +2,7 @@
   "expo": {
     "name": "FleteandoTe",
     "android": {
-      "package": "com.fermp.fleteandote",
+      "package": "com.fleteandote",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo"

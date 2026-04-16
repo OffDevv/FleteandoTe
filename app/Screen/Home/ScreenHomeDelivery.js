@@ -80,9 +80,6 @@ const HomeScreenDelivery = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.menuButton}>
-          <Ionicons name="menu-outline" size={30} color="#555" />
-        </TouchableOpacity>
         <View style={styles.logoCapsule}>
           <Text style={styles.logoText}>FleteandoTe</Text>
         </View>
@@ -206,8 +203,11 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: '#e0e0e0',
-    width: '100%',
+    backgroundColor: '#ececec',
+    width: '88%',
+    alignSelf: 'center',
+    marginVertical: 14,
+    borderRadius: 999,
   },
 });
 

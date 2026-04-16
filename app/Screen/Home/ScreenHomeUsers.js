@@ -20,14 +20,9 @@ export default function ScreenHomeUsers() {
   return (
     <ScrollView style={styles.container}>
     <View style={styles.header}>
-      <TouchableOpacity style={styles.menuButton}>
-        <Ionicons name="menu-outline" size={30} color="#555" />
-      </TouchableOpacity>
       <Text style={styles.text}></Text>
       </View>
-      <View style={styles.separator}
-      
-      />
+      <View style={styles.separator} />
    
     <Image source={require('../../Assets/Imagen1.png')} style={{ width: '100%', height: 300, marginTop: 20 }} />
 
@@ -62,8 +57,11 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: '#e0e0e0',
-    width: '100%',
+    backgroundColor: '#ececec',
+    width: '88%',
+    alignSelf: 'center',
+    marginVertical: 14,
+    borderRadius: 999,
   },
 
   routeButton: {

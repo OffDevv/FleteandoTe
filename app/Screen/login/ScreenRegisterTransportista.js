@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { registerAccount } from '../../services/registerService';
 
 export default function ScreenRegisterTransportista() {
-  const carroLogo = require('../../Assets/images/logo.png')
+  const carroLogo = require('../../Assets/images/logoFleteandote.png')
   const blurhash = '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
   //use state que serviran luego para  mandar la info a la base de datos
@@ -68,12 +68,12 @@ export default function ScreenRegisterTransportista() {
       <Card style={{
         backgroundColor: '#ffffff',
         borderRadius: 35,
-        position: 'absolute', // Se posiciona respecto al ScrollView
-        top: 50,              // Distancia desde arriba (ajusta segÃºn el notch del cel)
-        left: 20,             // Distancia desde la izquierda
-        width: 50,            // Un ancho razonable para un botÃ³n de "atrÃ¡s"
+        position: 'absolute', 
+        top: 50,              
+        left: 20,             
+        width: 50,           
         height: 50,
-        zIndex: 10,           // Asegura que estÃ© por encima de todo
+        zIndex: 10,           
         justifyContent: 'center',
         alignItems: 'center'
       }} onPress={() => navigation.navigate('login')}>
@@ -86,7 +86,7 @@ export default function ScreenRegisterTransportista() {
         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
           <Text style={styles.text} >FleteandoTe </Text>
           <Image
-            style={styles.image}        //el componente imagen me ayuda a poner imagenes y lo de blurbash sepa la bola pero esta en el manual
+            style={styles.image}        
             source={carroLogo}
             placeholder={{ blurhash }}
             contentFit='cover'

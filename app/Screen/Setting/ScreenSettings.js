@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, } from 'react-native'
 import React from 'react'
 import { Button } from 'react-native-paper';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 import Miperfil from '../../Components/Setting/Miperfil';
+
 
 export default function ScreenSettings() {
   const { setLogin, setUsuario, setTransportista, usuario } = React.useContext(EstadoGlobalContext);
@@ -31,6 +32,10 @@ export default function ScreenSettings() {
            >
              Cerrar Sesion
            </Button>
+        <View style={styles.footerContainer}>
+          <Text style={{ color: '#777' }}>© 2026 FleteandoTe. Todos los derechos reservados.</Text>
+        </View>
+
     </View>
   )
 }
@@ -55,5 +60,12 @@ const styles = StyleSheet.create({
     color: '#FFFFFF', // color del texto
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  footerContainer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    padding: 16,
+    alignItems: 'center',
   },
 })

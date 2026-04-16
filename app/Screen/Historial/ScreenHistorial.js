@@ -102,12 +102,6 @@ export default function ScreenHistorial({ navigation }) {
     <ScrollView style={styles.container}>
      
       <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.menuButton}
-          onPress={() => navigation.openDrawer()} 
-        >
-          <Ionicons name="menu-outline" size={30} color="#555" />
-        </TouchableOpacity>
         <Text style={styles.headerTitle}>Historial</Text>
       </View>
 

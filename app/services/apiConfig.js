@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 
 const DEVELOPMENT_ANDROID_API_BASE_URL = 'http://10.0.2.2:4000';
 const DEVELOPMENT_IOS_API_BASE_URL = 'http://localhost:4000';
+const DEFAULT_PRODUCTION_API_BASE_URL = 'https://zestful-recreation-production-020f.up.railway.app';
 
 export function getApiBaseUrl() {
   const configuredBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL?.trim();
@@ -16,7 +17,7 @@ export function getApiBaseUrl() {
       : DEVELOPMENT_IOS_API_BASE_URL;
   }
 
-  throw new Error('Define EXPO_PUBLIC_API_BASE_URL con una URL publica antes de generar el APK.');
+  return DEFAULT_PRODUCTION_API_BASE_URL;
 }
 
 export function getApiBaseUrlCandidates() {
@@ -26,13 +27,17 @@ export function getApiBaseUrlCandidates() {
     ? DEVELOPMENT_ANDROID_API_BASE_URL
     : DEVELOPMENT_IOS_API_BASE_URL;
 
-  if (typeof __DEV__ !== 'undefined' && __DEV__) {
-    candidates.push(devBaseUrl);
+  if (configuredBaseUrl) {
+    candidates.push(configuredBaseUrl);
   }
 
-  if (configuredBaseUrl) {
-    if (!candidates.includes(configuredBaseUrl)) {
-      candidates.push(configuredBaseUrl);
+  if (!configuredBaseUrl && (typeof __DEV__ === 'undefined' || !__DEV__)) {
+    candidates.push(DEFAULT_PRODUCTION_API_BASE_URL);
+  }
+
+  if (typeof __DEV__ !== 'undefined' && __DEV__) {
+    if (!candidates.includes(devBaseUrl)) {
+      candidates.push(devBaseUrl);
     }
   }
 

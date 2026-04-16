@@ -51,7 +51,7 @@ export default function ScreenLogin() {
             });
             setTransportista(user?.rol === 'transportista');
             setLogin(true);
-            Alert.alert('Bienvenido usuario');
+            Alert.alert('Bienvenido', ` ${user?.nombre || 'usuario'}`);
         } catch (error) {
             Alert.alert('Datos incorrectos', error.message || 'No se pudo iniciar sesion.');
         } finally {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FleteandoTe</string>
+    <string name="google_maps_api_key">AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo</string>
 </resources>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Platform } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import * as Location from 'expo-location';
@@ -14,6 +14,7 @@ export default function ScreenMaps() {
     const [destination, setDestination] = useState(null);
     const [distancia, setDistancia] = useState(0);
     const [direccion, setDireccion] = useState('Toca el mapa para elegir destino');
+    const [locationError, setLocationError] = useState(null);
 
     const confirmarRuta = () => {
         if (!destination) {
@@ -62,20 +63,36 @@ export default function ScreenMaps() {
 
     useEffect(() => {
         (async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') return;
+            try {
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                    setLocationError('Permiso de ubicacion denegado. Activalo para usar el mapa.');
+                    return;
+                }
 
-            let loc = await Location.getCurrentPositionAsync({
-                accuracy: Location.Accuracy.High,
-            });
-            setLocation({
-                latitude: loc.coords.latitude,
-                longitude: loc.coords.longitude,
-            });
+                let loc = await Location.getCurrentPositionAsync({
+                    accuracy: Location.Accuracy.High,
+                });
+                setLocation({
+                    latitude: loc.coords.latitude,
+                    longitude: loc.coords.longitude,
+                });
+            } catch (error) {
+                console.log('Error al obtener ubicacion:', error);
+                setLocationError('No se pudo obtener la ubicacion actual.');
+            }
         })();
     }, []);
 
-    if (!location) return <View style={styles.textoCarga}><Text style= {{padding:40, backgroundColor: 'green'}}>Cargando ubicación...</Text></View>;
+    if (locationError) {
+        return (
+            <View style={styles.textoCarga}>
+                <Text style={styles.errorText}>{locationError}</Text>
+            </View>
+        );
+    }
+
+    if (!location) return <View style={styles.textoCarga}><Text style= {{padding:40, backgroundColor: '#FF6B00'}}>Cargando ubicacion...</Text></View>;
 
     return (
         <View style={styles.container}>
@@ -101,7 +118,7 @@ export default function ScreenMaps() {
             </View>
 
             <MapView
-                provider={PROVIDER_GOOGLE}
+                provider={Platform.OS === 'android' ? PROVIDER_GOOGLE : undefined}
                 style={styles.map}
                 initialRegion={{
                     latitude: location.latitude,
@@ -109,6 +126,7 @@ export default function ScreenMaps() {
                     latitudeDelta: 0.05,
                     longitudeDelta: 0.05
                 }}
+                showsUserLocation
                 onPress={handlePress}
             >
                 <Marker
@@ -195,6 +213,14 @@ const styles = StyleSheet.create({
         color: '#333',
         textAlign: 'center',
         fontWeight: '500'
+    },
+    errorText: {
+        color: '#8b0000',
+        backgroundColor: '#ffe5e5',
+        padding: 16,
+        borderRadius: 10,
+        textAlign: 'center',
+        marginHorizontal: 20,
     }
 });
 
