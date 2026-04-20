@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { EstadoGlobalContext } from '../../Context/EstadoGlobalUser';
 import { getApiBaseUrlCandidates } from '../../services/apiConfig';
 
 const HomeScreenDelivery = () => {
+  const navigation = useNavigation();
   const { usuario } = useContext(EstadoGlobalContext);
   const [pedidos, setPedidos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -53,7 +55,7 @@ const HomeScreenDelivery = () => {
     obtenerPedidos();
   }, []);
 
-  const aceptarPedido = async (pedidoId) => {
+  const aceptarPedido = async (pedidoId, pedido) => {
     if (!usuario?.usuario_id) {
       Alert.alert('Sesion invalida', 'No se encontro el ID del transportista. Inicia sesion nuevamente.');
       return;
@@ -67,7 +69,36 @@ const HomeScreenDelivery = () => {
         body: JSON.stringify({}),
       });
 
-      Alert.alert('Pedido aceptado', 'Has aceptado el pedido exitosamente');
+      // Navegar al mapa pasando los puntos de inicio y final
+      // Conversión segura de puntos
+      let puntoInicio = pedido.punto_inicio;
+      let puntoFinal = pedido.punto_final;
+      // Si vienen como string tipo "lat,lng"
+      if (typeof puntoInicio === 'string') {
+        const [lat, lng] = puntoInicio.split(',').map(Number);
+        puntoInicio = { latitude: lat, longitude: lng };
+      }
+      if (typeof puntoFinal === 'string') {
+        const [lat, lng] = puntoFinal.split(',').map(Number);
+        puntoFinal = { latitude: lat, longitude: lng };
+      }
+      // Si vienen como array
+      if (Array.isArray(puntoInicio)) {
+        puntoInicio = { latitude: puntoInicio[0], longitude: puntoInicio[1] };
+      }
+      if (Array.isArray(puntoFinal)) {
+        puntoFinal = { latitude: puntoFinal[0], longitude: puntoFinal[1] };
+      }
+      console.log('Navegando al mapa con:', puntoInicio, puntoFinal);
+      navigation.navigate('Mapa', {
+        screen: 'mapa',
+        params: {
+          puntoInicio,
+          puntoFinal,
+        },
+      });
+      // Si quieres mostrar un mensaje, puedes hacerlo antes o después de navegar
+      // Alert.alert('Pedido aceptado', 'Has aceptado el pedido exitosamente');
       obtenerPedidos();
     } catch (error) {
       console.error('Error al aceptar pedido:', error);
@@ -88,7 +119,16 @@ const HomeScreenDelivery = () => {
       <View style={styles.separator} />
 
       <View style={styles.content}>
-        <Text style={styles.sectionTitle}>Pedidos pendientes</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
+          <Text style={styles.sectionTitle}>Pedidos pendientes</Text>
+          <TouchableOpacity
+            style={styles.reloadButton}
+            onPress={obtenerPedidos}
+            disabled={cargando}
+          >
+            <Ionicons name="refresh" size={22} color={cargando ? '#ccc' : '#333'} />
+          </TouchableOpacity>
+        </View>
 
         {cargando ? <ActivityIndicator size="large" color="#555" style={styles.loader} /> : null}
 
@@ -105,7 +145,7 @@ const HomeScreenDelivery = () => {
 
             <TouchableOpacity
               style={[styles.acceptButton, aceptandoId === pedido.solicitud_id && styles.acceptButtonDisabled]}
-              onPress={() => aceptarPedido(pedido.solicitud_id)}
+              onPress={() => aceptarPedido(pedido.solicitud_id, pedido)}
               disabled={aceptandoId === pedido.solicitud_id}
             >
               <Text style={styles.acceptButtonText}>
@@ -174,6 +214,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#ffd39c',
+  },
+  reloadButton: {
+    marginLeft: 10,
+    padding: 6,
+    borderRadius: 20,
+    backgroundColor: 'transparent',
   },
   cardTitle: {
     fontSize: 16,

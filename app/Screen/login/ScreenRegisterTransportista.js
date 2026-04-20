@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native'
-import { TextInput, Button, Card } from 'react-native-paper'
+import { StyleSheet, Text, View, ScrollView, Alert, TouchableOpacity } from 'react-native'
+import { TextInput, Button } from 'react-native-paper'
 import React, { useState } from 'react'
 import { Image } from 'expo-image'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -11,14 +11,16 @@ export default function ScreenRegisterTransportista() {
   const carroLogo = require('../../Assets/images/logoFleteandote.png')
   const blurhash = '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
-  //use state que serviran luego para  mandar la info a la base de datos
+  // ✅ FIX 1: navigation declarado al inicio, antes de usarse
+  const navigation = useNavigation();
+
   const [nombreEmpresa, setNombreEmpresa] = useState('');
   const [email, setEmail] = useState('');
   const [contra1, setContra1] = useState('');
   const [contra2, setContra2] = useState('');
-  const [verPass, setVerPass] = useState(true)
-  const [verPass2, setVerPass2] = useState(true)
-  const [loading, setLoading] = useState(false)
+  const [verPass, setVerPass] = useState(true);
+  const [verPass2, setVerPass2] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const presion = async () => {
     const cleanEmpresa = nombreEmpresa.trim();
@@ -48,117 +50,98 @@ export default function ScreenRegisterTransportista() {
         role: 'transportista',
       });
 
-      Alert.alert('Registro exitoso');
+      Alert.alert('Registro exitoso', 'Tu cuenta fue creada correctamente.'); // ✅ FIX: mensaje más descriptivo
       navigation.navigate('login');
     } catch (error) {
       Alert.alert('No se pudo registrar', error.message || 'Intenta nuevamente.');
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  const navigation = useNavigation();
+  // Tema reutilizable para todos los TextInput ✅ FIX: evita repetir el objeto theme 4 veces
+  const inputTheme = {
+    colors: {
+      primary: '#cccccc',
+      background: '#F5F5F5',
+      outline: 'transparent',
+    },
+    roundness: 15,
+  };
 
   return (
     <ScrollView
-      style={{ backgroundColor: '#FFC067' }} // Color de fondo del scroll
-      contentContainerStyle={{ flexGrow: 1 }} // Obliga al contenido a expandirse
-      bounces={false}>
-
-      <Card style={{
-        backgroundColor: '#ffffff',
-        borderRadius: 35,
-        position: 'absolute', 
-        top: 50,              
-        left: 20,             
-        width: 50,           
-        height: 50,
-        zIndex: 10,           
-        justifyContent: 'center',
-        alignItems: 'center'
-      }} onPress={() => navigation.navigate('login')}>
-
+      style={{ backgroundColor: '#FFC067' }}
+      contentContainerStyle={{ flexGrow: 1 }}
+      bounces={false}
+      keyboardShouldPersistTaps="handled" // ✅ FIX: evita que el teclado cierre al tocar el scroll
+    >
+      {/* ✅ FIX 2: TouchableOpacity en lugar de Card para el botón de regreso */}
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.navigate('login')}
+        activeOpacity={0.8}
+      >
         <AntDesign name="left" size={20} color="black" />
-      </Card>
+      </TouchableOpacity>
 
       <View style={styles.container}>
-        <Text style={styles.mainText} >Estas listo para unirte al equipo de  </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-          <Text style={styles.text} >FleteandoTe </Text>
+        <Text style={styles.mainText}>Estas listo para unirte al equipo de</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={styles.text}>FleteandoTe </Text>
           <Image
-            style={styles.image}        
+            style={styles.image}
             source={carroLogo}
             placeholder={{ blurhash }}
-            contentFit='cover'
+            contentFit="cover"
             transition={1000}
           />
         </View>
 
         <View style={styles.cuadrosdatos}>
-          <Text style={styles.datosLabels}>
-            Nombre de tu empresa:
-          </Text>
+          <Text style={styles.datosLabels}>Nombre de tu empresa:</Text>
           <TextInput
             style={styles.inputs}
             placeholder="Empresa"
-            value={nombreEmpresa} // 1. Conectamos el valor con el estado
-            onChangeText={(texto) => {
-              setNombreEmpresa(texto);        // 2. Guardamos el texto       aqui estoy viendo como mostrar en la consola que estoy guardando correctamentea en la variable set
-              console.log(texto);   // 3. Lo vemos en consola
-            }}
+            value={nombreEmpresa}
+            onChangeText={setNombreEmpresa} // ✅ FIX 3: simplificado, sin console.log
             mode="outlined"
             placeholderTextColor="#c4c4c4"
-            theme={{
-              colors: {
-                primary: '#cccccc',      // le pongo color del borde activo
-                background: '#F5F5F5',   // le pongo color de fondo del input
-                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
-              },
-              roundness: 15
-            }}
+            autoCapitalize="words" // ✅ capitaliza nombre de empresa
+            theme={inputTheme}
           />
-          <Text style={styles.datosLabels}>
-            Correo de tu empresa:
-          </Text>
+
+          <Text style={styles.datosLabels}>Correo de tu empresa:</Text>
           <TextInput
             style={styles.inputs}
             placeholder="example@gmail.com"
             value={email}
-            onChangeText={(texto) => {
-              setEmail(texto);
-              console.log(texto);
-            }}
+            onChangeText={setEmail} // ✅ FIX 3: simplificado
             mode="outlined"
             placeholderTextColor="#c4c4c4"
-            theme={{
-              colors: {
-                primary: '#cccccc',      // le pongo color del borde activo
-                background: '#F5F5F5',   // le pongo color de fondo del input
-                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
-              },
-              roundness: 15
-            }}
+            keyboardType="email-address" // ✅ FIX 4: teclado correcto para email
+            autoCapitalize="none"        // ✅ FIX 4: evita mayúsculas en el email
+            autoCorrect={false}          // ✅ evita autocorrección en emails
+            theme={inputTheme}
           />
-          <Text style={styles.datosLabels}>
-            Contraseña:
-          </Text>
+
+          <Text style={styles.datosLabels}>Contraseña:</Text>
           <TextInput
             value={contra1}
-            onChangeText={(texto) => {
-              setContra1(texto);
-              console.log(texto);
-            }}
+            onChangeText={setContra1} // ✅ FIX 3: simplificado
             secureTextEntry={verPass}
             style={styles.inputs}
             placeholder="Ej. SuperContraseña777"
-            mode='outlined'
+            mode="outlined"
             placeholderTextColor="#c4c4c4"
+            autoCapitalize="none" // ✅ contraseñas no deben tener autocapitalización
+            theme={inputTheme}
             right={
               <TextInput.Icon
-                icon={props => (
+                icon={(props) => (
                   <Ionicons
                     {...props}
-                    name={verPass ? "eye-off" : "eye"}
+                    name={verPass ? 'eye-off' : 'eye'}
                     size={20}
                     color="#9E9E9E"
                   />
@@ -166,35 +149,25 @@ export default function ScreenRegisterTransportista() {
                 onPress={() => setVerPass(!verPass)}
               />
             }
-            theme={{
-              colors: {
-                primary: '#cccccc',      // aqui agrego color del borde activo
-                background: '#F5F5F5',   // le quito ese color feo morado y le pongo color al fondo del input
-                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
-              },
-              roundness: 15
-            }}
           />
-          <Text style={styles.datosLabels}>
-            Escribe otra vez tu contraseña:
-          </Text>
+
+          <Text style={styles.datosLabels}>Escribe otra vez tu contraseña:</Text>
           <TextInput
             value={contra2}
-            onChangeText={(texto) => {
-              setContra2(texto);
-              console.log(texto);
-            }}
+            onChangeText={setContra2} // ✅ FIX 3: simplificado
             secureTextEntry={verPass2}
             style={styles.inputs}
             placeholder="Ingresa de nuevo tu contraseña"
-            mode='outlined'
+            mode="outlined"
             placeholderTextColor="#c4c4c4"
+            autoCapitalize="none"
+            theme={inputTheme}
             right={
               <TextInput.Icon
-                icon={props => (
+                icon={(props) => (
                   <Ionicons
                     {...props}
-                    name={verPass2 ? "eye-off" : "eye"}
+                    name={verPass2 ? 'eye-off' : 'eye'}
                     size={20}
                     color="#9E9E9E"
                   />
@@ -202,32 +175,25 @@ export default function ScreenRegisterTransportista() {
                 onPress={() => setVerPass2(!verPass2)}
               />
             }
-            theme={{
-              colors: {
-                primary: '#cccccc',      // aqui agrego color del borde activo
-                background: '#F5F5F5',   // le quito ese color feo morado y le pongo color al fondo del input
-                outline: 'transparent' //esto le quita la linea negra fea que viene con el textInput de react native
-              },
-              roundness: 15
-            }}
           />
-          {/*esta parte de la logica me ayudara a hacer que suelte el mensaje de error si las contras no son las mismas*/}
+
           {contra2.length > 0 && contra1 !== contra2 && (
-            <Text style={styles.errorText}>
-              Las contraseñas no coinciden
-            </Text>
+            <Text style={styles.errorText}>Las contraseñas no coinciden</Text>
           )}
+
           <Button
-            mode='contained'
+            mode="contained"
             style={styles.styleButtonLogin}
             onPress={presion}
             loading={loading}
             disabled={loading || contra1 !== contra2 || contra1 === ''}
-          >Crea tu cuenta</Button>
+          >
+            Crea tu cuenta
+          </Button>
         </View>
       </View>
     </ScrollView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -237,50 +203,65 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFC067',
   },
+  // ✅ FIX 2: estilo propio para el botón de regreso
+  backButton: {
+    backgroundColor: '#ffffff',
+    borderRadius: 35,
+    position: 'absolute',
+    top: 50,
+    left: 20,
+    width: 50,
+    height: 50,
+    zIndex: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',       // ✅ sombra sutil para que se vea flotando
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
   mainText: {
-    marginHorizontal:47,  //esto quita espacio de los lados
-    // backgroundColor: 'green', lo puse nomas para ver que espacio ocupaba el texto jejeje
+    marginHorizontal: 47,
     fontSize: 30,
     fontWeight: '500',
     color: 'white',
     marginTop: 65,
     marginBottom: 7,
-    textAlign: 'center', // <--- Esto centra las lÃ­neas de texto entre sÃ­
-    paddingHorizontal: 20, // <--- Esto evita que el texto toque los bordes de la pantalla
+    textAlign: 'center',
+    paddingHorizontal: 20,
   },
   text: {
     fontSize: 40,
     fontWeight: 'bold',
     color: 'white',
-    marginTop: 0
+    marginTop: 0,
   },
   image: {
     width: 70,
     height: 60,
   },
   cuadrosdatos: {
-    flex: 1,                  // ocupa el espacio restante
-    width: '90%',             // ancho relativo
+    flex: 1,
+    width: '90%',
     backgroundColor: '#fff',
     borderRadius: 50,
-    marginTop: 20,            // espacio entre el texto y el cuadro
-    marginBottom: 30,         // espacio entre el cuadro y el final de la pantalla
+    marginTop: 20,
+    marginBottom: 30,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-
+    paddingBottom: 30, // ✅ FIX 5: espacio interno para que el botón no quede pegado al borde
   },
   datosLabels: {
     marginTop: 30,
     marginHorizontal: 25,
-    fontSize: 17
-
+    fontSize: 17,
   },
   inputs: {
-
     alignSelf: 'center',
     width: '90%',
     marginHorizontal: 10,
-    marginTop: 10
+    marginTop: 10,
   },
   styleButtonLogin: {
     backgroundColor: '#2094FE',
@@ -288,14 +269,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignSelf: 'stretch',
     marginHorizontal: 16,
-    padding: 7
+    padding: 7,
   },
   errorText: {
     color: 'red',
     fontSize: 12,
     marginTop: 5,
     marginLeft: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-
-})
+});

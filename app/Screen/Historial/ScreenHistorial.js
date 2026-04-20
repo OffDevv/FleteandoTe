@@ -137,6 +137,19 @@ export default function ScreenHistorial({ navigation }) {
 
               <View style={styles.cardStatus}>
                 <Text style={styles.typeText}>{tipoLabel}</Text>
+                <TouchableOpacity
+                  style={{ marginTop: 8, backgroundColor: '#ff9f1a', padding: 8, borderRadius: 8 }}
+                  onPress={() => navigation.navigate('ChatStack', {
+                    screen: 'chat',
+                    params: {
+                      pedidoId: item.solicitud_id,
+                      receptorId: item.transportista_id === usuario.usuario_id ? item.usuario_id : item.transportista_id,
+                      receptorNombre: item.transportista_id === usuario.usuario_id ? item.nombre_usuario : item.nombre_transportista,
+                    },
+                  })}
+                >
+                  <Text style={{ color: '#fff', fontWeight: 'bold' }}>Abrir chat</Text>
+                </TouchableOpacity>
               </View>
             </View>
           );

@@ -8,13 +8,28 @@ import { useNavigation } from '@react-navigation/native';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyAvt9AnpvHfi3GKapnoSUKRqLTNR9tAaWo';
 
-export default function ScreenMaps() {
+export default function ScreenMaps({ route }) {
     const navigation = useNavigation();
     const [location, setLocation] = useState(null);
     const [destination, setDestination] = useState(null);
     const [distancia, setDistancia] = useState(0);
     const [direccion, setDireccion] = useState('Toca el mapa para elegir destino');
     const [locationError, setLocationError] = useState(null);
+
+    // Si recibimos puntos por navegación, los usamos
+    useEffect(() => {
+        if (route?.params?.puntoInicio && route?.params?.puntoFinal) {
+            setLocation({
+                latitude: route.params.puntoInicio.latitude,
+                longitude: route.params.puntoInicio.longitude,
+            });
+            setDestination({
+                latitude: route.params.puntoFinal.latitude,
+                longitude: route.params.puntoFinal.longitude,
+            });
+            setDireccion('Destino seleccionado automáticamente');
+        }
+    }, [route?.params]);
 
     const confirmarRuta = () => {
         if (!destination) {
@@ -62,6 +77,8 @@ export default function ScreenMaps() {
     };
 
     useEffect(() => {
+        // Si ya tenemos puntoInicio y puntoFinal, no pedimos ubicación
+        if (route?.params?.puntoInicio && route?.params?.puntoFinal) return;
         (async () => {
             try {
                 let { status } = await Location.requestForegroundPermissionsAsync();
@@ -82,7 +99,7 @@ export default function ScreenMaps() {
                 setLocationError('No se pudo obtener la ubicacion actual.');
             }
         })();
-    }, []);
+    }, [route?.params]);
 
     if (locationError) {
         return (

@@ -18,6 +18,7 @@ import ScreenRegisterTransportista from './Screen/login/ScreenRegisterTransporti
 import ScreenSettings from './Screen/Setting/ScreenSettings';
 import ScreenMaops from './Screen/Map/ScreenMaps';
 import ScreenPedido from './Screen/Pedido/ScreenPedido';
+import MyStackChat from './MyStackChat';
 
 const Stack = createStackNavigator();
 export default function MyNavigation() {
@@ -54,6 +55,9 @@ export default function MyNavigation() {
         tabBarIcon: ({ color, size }) =>
           <FontAwesome name="map" size={24} color="#555" />
       }} />
+
+      {/* Chat no aparece en tab, pero queda en navegación */}
+      <Tab.Screen name="ChatStack" component={MyStackChat} options={{ tabBarButton: () => null, headerShown: false }} />
 
     </Tab.Navigator>
 

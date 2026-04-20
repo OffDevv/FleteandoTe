@@ -1,3 +1,40 @@
+// --- ENDPOINTS DE MENSAJES ---
+// Obtener mensajes de un flete (pedido)
+app.get('/api/mensajes/:flete_id', async (req, res) => {
+  const flete_id = Number(req.params.flete_id);
+  if (!Number.isInteger(flete_id) || flete_id <= 0) {
+    return res.status(400).json({ ok: false, message: 'flete_id invalido' });
+  }
+  try {
+    const [rows] = await pool.query(
+      `SELECT id, flete_id, emisor_id, receptor_id, mensaje, fecha_envio
+       FROM mensajes WHERE flete_id = ? ORDER BY fecha_envio ASC`,
+      [flete_id]
+    );
+    return res.status(200).json({ ok: true, mensajes: rows });
+  } catch (error) {
+    return res.status(500).json({ ok: false, message: 'Error al obtener mensajes', error: error.message });
+  }
+});
+
+// Enviar mensaje
+app.post('/api/mensajes', async (req, res) => {
+  console.log('POST /api/mensajes body:', req.body);
+  const { flete_id, emisor_id, receptor_id, mensaje } = req.body;
+  if (!flete_id || !emisor_id || !receptor_id || !mensaje) {
+    return res.status(400).json({ ok: false, message: 'Datos incompletos para enviar mensaje' });
+  }
+  try {
+    await pool.query(
+      `INSERT INTO mensajes (flete_id, emisor_id, receptor_id, mensaje, fecha_envio)
+       VALUES (?, ?, ?, ?, NOW())`,
+      [flete_id, emisor_id, receptor_id, mensaje]
+    );
+    return res.status(201).json({ ok: true, message: 'Mensaje enviado' });
+  } catch (error) {
+    return res.status(500).json({ ok: false, message: 'Error al enviar mensaje', error: error.message });
+  }
+});
 require('dotenv').config();
 
 const express = require('express');
